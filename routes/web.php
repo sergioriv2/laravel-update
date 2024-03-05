@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CoursesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', HomeController::class);
+
+Route::controller(CoursesController::class)->group(function () {
+    Route::get('/courses', 'index');
+    Route::get('/courses/create', 'create');
+    Route::get('/courses/{course}', 'view');
 });
